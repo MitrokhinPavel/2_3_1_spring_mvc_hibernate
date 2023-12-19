@@ -1,5 +1,9 @@
 package web.dao;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import web.model.User;
 
 import org.springframework.stereotype.Repository;
@@ -14,6 +18,10 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+//    @Override
+//    public void createUsersTable() {
+//        // код
+//    }
     @Override
     @Transactional
     public void saveUser(User user) {

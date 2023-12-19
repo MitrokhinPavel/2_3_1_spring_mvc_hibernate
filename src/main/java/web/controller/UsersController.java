@@ -18,7 +18,7 @@ public class UsersController {
 	@Autowired
 	public UsersController(UserServiceImpl userServiceImpl) {
 		this.userServiceImpl = userServiceImpl;
-
+//		userServiceImpl.createUsersTable();
 		User user1 = new User("Ivan1", "Ivanov1", "ivanov1@mail.ru");
 		User user2 = new User("Ivan2", "Ivanov2", "ivanov2@mail.ru");
 		userServiceImpl.saveUser(user1);
@@ -30,7 +30,7 @@ public class UsersController {
 //		model.addAttribute("users", userList);
 //		return "users";
 //	}
-	@GetMapping({"", "/", "users"})
+	@GetMapping(value = "/users")
 	public String printUsers(Model model, @ModelAttribute("flashMessage") String flashAttribute) {
 		model.addAttribute("users", userServiceImpl.getAllUsers());
 		return "users";

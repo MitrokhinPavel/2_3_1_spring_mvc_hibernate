@@ -13,6 +13,9 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
+//    public void createUsersTable() {
+//        userDao.createUsersTable();
+//    }
     public void saveUser(User user) {
         userDao.saveUser(user);
     }
