@@ -2,8 +2,10 @@ package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import web.model.User;
 import web.service.UserServiceImpl;
 
@@ -22,10 +24,18 @@ public class UsersController {
 		userServiceImpl.saveUser(user1);
 		userServiceImpl.saveUser(user2);
 	}
-	@GetMapping(value = "/users")
-	public String printUsers(ModelMap model) {
-		List<User> userList = userServiceImpl.getAllUsers();
-		model.addAttribute("users", userList);
+//	@GetMapping(value = "/users")
+//	public String printUsers(ModelMap model) {
+//		List<User> userList = userServiceImpl.getAllUsers();
+//		model.addAttribute("users", userList);
+//		return "users";
+//	}
+	@GetMapping({"", "/", "users"})
+	public String printUsers(Model model, @ModelAttribute("flashMessage") String flashAttribute) {
+		model.addAttribute("users", userServiceImpl.getAllUsers());
 		return "users";
 	}
+
+
+
 }
