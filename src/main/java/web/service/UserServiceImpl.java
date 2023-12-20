@@ -5,8 +5,10 @@ import web.dao.UserDao;
 import web.dao.UserDaoImpl;
 import web.model.User;
 
+import javax.transaction.Transactional;
 import java.util.List;
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
@@ -16,12 +18,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createOrUpdateUser(User user) {
-        if (0 == user.getId()) {
+        if (user.getId() == null) {
             createUser(user);
         } else {
-            updateUser(user);
+            if (user.getId() != null) {
+                updateUser(user);
+            } else {
+                throw new IllegalArgumentException("User ID cannot be null");
+            }
         }
     }
+
     private void createUser(User user) {
         userDao.createUser(user);
     }

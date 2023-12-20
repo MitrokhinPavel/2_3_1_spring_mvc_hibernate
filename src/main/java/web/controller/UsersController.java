@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @Controller
@@ -23,10 +24,12 @@ public class UsersController {
 		model.addAttribute("users", userService.getAllUsers());
 		return "list";
 	}
+
 	@GetMapping(value = "/new")
 	public String addUserForm(@ModelAttribute("user") User user) {
 		return "form";
 	}
+
 	@PostMapping()
 	public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
@@ -35,6 +38,7 @@ public class UsersController {
 		userService.createOrUpdateUser(user);
 		return "redirect:/users";
 	}
+
 	@GetMapping("/{id}/edit")
 	public String editUserForm(@PathVariable(value = "id", required = true) long id, Model model) {
 		User user = userService.readUser(id);
@@ -44,6 +48,7 @@ public class UsersController {
 		model.addAttribute("user", userService.readUser(id));
 		return "form";
 	}
+
 	@GetMapping("/delete")
 	public String deleteUser(@RequestParam(value = "id", required = true, defaultValue = "") long id) {
 		User user = userService.deleteUser(id);
