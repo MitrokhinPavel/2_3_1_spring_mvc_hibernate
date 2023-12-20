@@ -1,6 +1,8 @@
 package web.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -19,7 +21,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    public User() {}
+    public User() {
+
+    }
 
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -57,5 +61,11 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("User [id = %d; firstName = %s; lastName = %s; email = %s]",
+                id, firstName, lastName, email);
     }
 }
