@@ -2,7 +2,6 @@ package web.service;
 
 import org.springframework.stereotype.Service;
 import web.dao.UserDao;
-import web.dao.UserDaoImpl;
 import web.model.User;
 
 import javax.transaction.Transactional;
@@ -18,17 +17,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createOrUpdateUser(User user) {
-        if (user.getId() == null) {
+        if (0 == user.getId()) {
             createUser(user);
         } else {
-            if (user.getId() != null) {
-                updateUser(user);
-            } else {
-                throw new IllegalArgumentException("User ID cannot be null");
-            }
+            updateUser(user);
         }
     }
-
     private void createUser(User user) {
         userDao.createUser(user);
     }

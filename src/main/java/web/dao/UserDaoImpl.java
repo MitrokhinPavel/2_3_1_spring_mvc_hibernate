@@ -1,16 +1,10 @@
 package web.dao;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 import web.model.User;
 
-import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -21,12 +15,12 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void createUser(User user) {
         entityManager.persist(user);
-//        entityManager.flush();
+        entityManager.flush();
     }
     @Override
     public void updateUser(User user) {
         entityManager.merge(user);
-//        entityManager.flush();
+        entityManager.flush();
     }
     @Override
     public List<User> getAllUsers() {
@@ -45,7 +39,7 @@ public class UserDaoImpl implements UserDao {
             throw new NullPointerException("User not found");
         }
         entityManager.remove(user);
-//        entityManager.flush();
+        entityManager.flush();
         return user;
     }
 }
