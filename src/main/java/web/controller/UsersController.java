@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -38,15 +39,15 @@ public class UsersController {
 		return "redirect:/users";
 	}
 
-	@GetMapping("/{id}/edit")
-	public String editUserForm(@PathVariable(value = "id", required = true) long id, Model model) {
-		User user = userService.readUser(id);
-		if (null == user) {
-			return "redirect:/users";
-		}
-		model.addAttribute("user", userService.readUser(id));
-		return "form";
+@GetMapping("/edit")
+public String editUserForm(@RequestParam("id") long id, Model model) {
+	User user = userService.readUser(id);
+	if (null == user) {
+		return "redirect:/users";
 	}
+	model.addAttribute("user", user);
+	return "form";
+}
 
 	@GetMapping("/delete")
 	public String deleteUser(@RequestParam(value = "id", required = true, defaultValue = "") long id) {

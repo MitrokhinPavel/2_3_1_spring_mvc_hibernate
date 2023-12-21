@@ -20,7 +20,7 @@
             <td th:text="${user.lastName}">...</td>
             <td th:text="${user.email}">...</td>
             <td>
-                <a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a>
+                <a th:href="@{/users/edit(id=${user.getId()})}">Edit</a>
                 <a th:href="@{/users/delete(id=${user.getId()})}">Delete</a>
             </td>
         </tr>
