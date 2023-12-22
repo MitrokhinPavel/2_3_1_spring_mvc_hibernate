@@ -15,12 +15,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void createUser(User user) {
         entityManager.persist(user);
-        entityManager.flush();
     }
     @Override
     public void updateUser(User user) {
         entityManager.merge(user);
-        entityManager.flush();
     }
     @Override
     public List<User> getAllUsers() {
@@ -31,7 +29,6 @@ public class UserDaoImpl implements UserDao {
     public User readUser(long id) {
         return entityManager.find(User.class, id);
     }
-
     @Override
     public User deleteUser(long id) throws NullPointerException {
         User user = readUser(id);
@@ -39,7 +36,6 @@ public class UserDaoImpl implements UserDao {
             throw new NullPointerException("User not found");
         }
         entityManager.remove(user);
-        entityManager.flush();
         return user;
     }
 }
